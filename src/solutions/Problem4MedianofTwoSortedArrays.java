@@ -3,54 +3,133 @@ package solutions;
 public class Problem4MedianofTwoSortedArrays {
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int m = nums1.length;
-        int n = nums2.length;
+        int aLeftLength = nums1.length;
+        int bLeftLength = nums2.length;
+        int totalLength = aLeftLength + bLeftLength;
+        int nums1_start = 0;
+        int nums2_start = 0;
 
-        // 第一种情况a(m)<b(1)或b(n)<a(1)
-        if (nums1[m - 1] < nums2[0]) {
-            return situation1(nums1, nums2);
-        }
-        if (nums1[0] > nums2[n - 1]) {
-            return situation1(nums2, nums1);
-        }
+        boolean isOdd = isOdd(totalLength);
+        // 一共需要去掉k个元素
+        int k = (aLeftLength + bLeftLength - 1) / 2;
 
-        return 0;
-    }
+        while (k > 1) {
+            int t = k / 2;
 
-    /**
-     * 第一种情况a(m)<b(1)或b(n)<a(1)
-     *
-     * @param
-     * @return
-     * @version 1.0
-     * @author Yi
-     * @date 3/26/2019
-     */
-    private double situation1(int[] nums1, int[] nums2) {
-        int m = nums1.length;
-        int n = nums2.length;
-        int totalLength = m + n;
-
-        if (!isOdd(totalLength)) {
-            int medianPosB = totalLength / 2;
-            int medianPosA = medianPosB - 1;
-            if (medianPosA >= m) {
-                return ((double) nums2[medianPosA - m] + (double) nums2[medianPosB - m]) / 2;
-            } else if (medianPosB < m) {
-                return ((double) nums1[medianPosA] + (double) nums1[medianPosB]) / 2;
+            if (t >= bLeftLength) {
+                //nums1前t个元素全部舍弃
+                nums1_start += t;
+                k -= t;
+                aLeftLength -= t;
+            } else if (t >= aLeftLength) {
+                //nums2前t个元素全部舍弃
+                nums2_start += t;
+                k -= t;
+                bLeftLength -= t;
             } else {
-                return ((double) nums1[medianPosA] + (double) nums2[medianPosB - m]) / 2;
+                // nums1[t-1]>=nums1[t-1]时，nums2中前t个元素可全部舍弃，反之亦然
+                if (nums1[nums1_start + t - 1] >= nums2[nums2_start + t - 1]) {
+                    nums2_start += t;
+                    k -= t;
+                    bLeftLength -= t;
+                } else {
+                    nums1_start += t;
+                    k -= t;
+                    aLeftLength -= t;
+                }
             }
+        }
+
+        k = 1;
+        while (k > 0) {
+            if (1 > bLeftLength) {
+                //nums1前t个元素全部舍弃
+                nums1_start++;
+                aLeftLength--;
+            } else if (1 > aLeftLength) {
+                //nums2前t个元素全部舍弃
+                nums2_start++;
+                bLeftLength--;
+            } else {
+                // nums1[t-1]>=nums1[t-1]时，nums2中前t个元素可全部舍弃，反之亦然
+                if (nums1[nums1_start] >= nums2[nums2_start]) {
+                    nums2_start++;
+                    bLeftLength--;
+                } else {
+                    nums1_start++;
+                    aLeftLength--;
+                }
+            }
+            k--;
+        }
+
+        if (isOdd) {
+            k += 1;
         } else {
-            int medianPos = (totalLength - 1) / 2;
-            if (medianPos < m) {
-                return (double) nums1[medianPos];
+            k += 2;
+        }
+
+        double median = 0;
+
+        while (k > 0) {
+            if (1 > bLeftLength) {
+                //nums1前t个元素全部舍弃
+                median += nums1[nums1_start];
+                nums1_start++;
+                aLeftLength--;
+            } else if (1 > aLeftLength) {
+                //nums2前t个元素全部舍弃
+                median += nums2[nums2_start];
+                nums2_start++;
+                bLeftLength--;
             } else {
-                return (double) nums2[medianPos - m];
+                // nums1[t-1]>=nums1[t-1]时，nums2中前t个元素可全部舍弃，反之亦然
+                if (nums1[nums1_start] >= nums2[nums2_start]) {
+                    median += nums2[nums2_start];
+                    nums2_start++;
+                    bLeftLength--;
+                } else {
+                    median += nums1[nums1_start];
+                    nums1_start++;
+                    aLeftLength--;
+                }
             }
+            k--;
+        }
+
+        if (isOdd) {
+            return median;
+        } else {
+            return median / 2;
         }
 
     }
+
+//    private int removeKElements(int[] nums1, int[] nums2,Integer nums1_start,Integer nums2_start,Integer k) {
+//        int aLeftLength = nums1.length-nums1_start;
+//        int bLeftLength = nums2.length-nums2_start;
+//        int t = k / 2;
+//
+//        if (t >= bLeftLength) {
+//            //nums1前t个元素全部舍弃
+//            nums1_start += t;
+//            k -= t;
+//        } else if (t >= aLeftLength) {
+//            //nums2前t个元素全部舍弃
+//            nums2_start += t;
+//            k -= t;
+//        } else {
+//            // nums1[t-1]>=nums1[t-1]时，nums2中前t个元素可全部舍弃，反之亦然
+//            if (nums1[nums1_start + t - 1] >= nums2[nums2_start + t - 1]) {
+//                nums2_start += t;
+//                k -= t;
+//            } else {
+//                nums1_start += t;
+//                k -= t;
+//            }
+//        }
+//
+//    }
 
     /**
      * 判断是否为奇数

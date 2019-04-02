@@ -40,7 +40,6 @@ public class Problem4MedianofTwoSortedArrays {
             }
         }
 
-        k = 1;
         while (k > 0) {
             if (1 > bLeftLength) {
                 //nums1前t个元素全部舍弃
@@ -104,32 +103,6 @@ public class Problem4MedianofTwoSortedArrays {
         }
 
     }
-
-//    private int removeKElements(int[] nums1, int[] nums2,Integer nums1_start,Integer nums2_start,Integer k) {
-//        int aLeftLength = nums1.length-nums1_start;
-//        int bLeftLength = nums2.length-nums2_start;
-//        int t = k / 2;
-//
-//        if (t >= bLeftLength) {
-//            //nums1前t个元素全部舍弃
-//            nums1_start += t;
-//            k -= t;
-//        } else if (t >= aLeftLength) {
-//            //nums2前t个元素全部舍弃
-//            nums2_start += t;
-//            k -= t;
-//        } else {
-//            // nums1[t-1]>=nums1[t-1]时，nums2中前t个元素可全部舍弃，反之亦然
-//            if (nums1[nums1_start + t - 1] >= nums2[nums2_start + t - 1]) {
-//                nums2_start += t;
-//                k -= t;
-//            } else {
-//                nums1_start += t;
-//                k -= t;
-//            }
-//        }
-//
-//    }
 
     /**
      * 判断是否为奇数

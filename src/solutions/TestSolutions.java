@@ -23,7 +23,7 @@ public class TestSolutions {
     }
 
     private static void problem5LongestPalindromicSubstring() {
-        String input = "babad";
+        String input = "dcbbc";
 
         Problem5LongestPalindromicSubstring methodClass = new Problem5LongestPalindromicSubstring();
         String output = methodClass.longestPalindrome(input);

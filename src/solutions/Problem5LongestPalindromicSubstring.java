@@ -15,6 +15,7 @@ public class Problem5LongestPalindromicSubstring {
             // 第一位的情况单独拿出来讨论
             if (s[0] == s[1]) {
                 sb.append(s[1]);
+                longestLength = 2;
             }
             // 讨论第二位开始到倒数第二位
             int lengthToLast;
@@ -43,7 +44,7 @@ public class Problem5LongestPalindromicSubstring {
                 }
 
                 int tmpLength2 = 0;
-                for (int j = 1; j < innerLoop2; j++) {
+                for (int j = 1; j <= innerLoop2; j++) {
                     if (s[i + 1 - j] == s[i + j]) {
                         tmpLength2 += 2;
                     } else {
@@ -56,11 +57,14 @@ public class Problem5LongestPalindromicSubstring {
                 if (tmpLength1 > longestLength) {
                     if (tmpLength2 > tmpLength1) {
                         chooseWhich = 2;
+                        longestLength = tmpLength2;
                     } else {
                         chooseWhich = 1;
+                        longestLength = tmpLength1;
                     }
                 } else if (tmpLength2 > longestLength) {
                     chooseWhich = 2;
+                    longestLength = tmpLength2;
                 }
 
                 switch (chooseWhich) {
@@ -80,7 +84,6 @@ public class Problem5LongestPalindromicSubstring {
 
             }
             // 讨论最后一位的情况
-
         }
 
         longestPalindromicSubstring = sb.toString();

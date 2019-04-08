@@ -1,93 +1,74 @@
 package solutions;
 
 public class Problem5LongestPalindromicSubstring {
-    public String longestPalindrome(String input) {
-        char[] s = input.toCharArray();
-        StringBuilder sb = new StringBuilder();
-        String longestPalindromicSubstring = "";
 
-        if (s == null || s.length == 0) return longestPalindromicSubstring;
+    private int low_pos = 0;
+    private int maxLength = 0;
 
-        int sLength = s.length;
-        sb.append(s[0]);
-        int longestLength = 1;
-        if (sLength > 1) {
-            // 第一位的情况单独拿出来讨论
-            if (s[0] == s[1]) {
-                sb.append(s[1]);
-                longestLength = 2;
-            }
-            // 讨论第二位开始到倒数第二位
-            int lengthToLast;
-            int innerLoop1, innerLoop2;
-            for (int i = 1; i < sLength - 1; i++) {
-                lengthToLast = sLength - i - 1;
-                if (i < lengthToLast) {
-                    innerLoop1 = i;
-                } else {
-                    innerLoop1 = lengthToLast;
-                }
+    public String longestPalindrome(String s) {
+        if (s == null) return null;
+        int length = s.length();
+        if (length < 2) return s;
 
-                int tmpLength1 = 1;
-                for (int j = 1; j <= innerLoop1; j++) {
-                    if (s[i - j] == s[i + j]) {
-                        tmpLength1 += 2;
-                    } else {
-                        break;
-                    }
-                }
-
-                if (i + 1 < lengthToLast) {
-                    innerLoop2 = i + 1;
-                } else {
-                    innerLoop2 = lengthToLast;
-                }
-
-                int tmpLength2 = 0;
-                for (int j = 1; j <= innerLoop2; j++) {
-                    if (s[i + 1 - j] == s[i + j]) {
-                        tmpLength2 += 2;
-                    } else {
-                        break;
-                    }
-                }
-
-                //判断本次循环是否有新的最长回文数
-                int chooseWhich = 0;
-                if (tmpLength1 > longestLength) {
-                    if (tmpLength2 > tmpLength1) {
-                        chooseWhich = 2;
-                        longestLength = tmpLength2;
-                    } else {
-                        chooseWhich = 1;
-                        longestLength = tmpLength1;
-                    }
-                } else if (tmpLength2 > longestLength) {
-                    chooseWhich = 2;
-                    longestLength = tmpLength2;
-                }
-
-                switch (chooseWhich) {
-                    case 1:
-                        sb.delete(0, sb.length());
-                        for (int k = (i - (tmpLength1 - 1) / 2); k <= (i + (tmpLength1 - 1) / 2); k++)
-                            sb.append(s[k]);
-                        break;
-                    case 2:
-                        sb.delete(0, sb.length());
-                        for (int k = (i + 1 - tmpLength2 / 2); k <= (i + tmpLength2 / 2); k++)
-                            sb.append(s[k]);
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-            // 讨论最后一位的情况
+        for (int i = 0; i < length - 1; i++) {
+            extendsPalindromeSubString(s, length, i, i);
+            extendsPalindromeSubString(s, length, i, i + 1);
         }
 
-        longestPalindromicSubstring = sb.toString();
+        return s.substring(low_pos, low_pos + maxLength);
+    }
 
-        return longestPalindromicSubstring;
+    private void extendsPalindromeSubString(String s, int length, int start, int end) {
+        while (start >= 0 && end < length && s.charAt(start) == s.charAt(end)) {
+            start--;
+            end++;
+        }
+
+        int palindromeSubString = end - start - 1;
+        if (palindromeSubString > maxLength) {
+            maxLength = palindromeSubString;
+            low_pos = start + 1;
+        }
+    }
+
+    @Deprecated
+    public String longestPalindrome2(String s) {
+        // 入参为null是返回null
+        if (s == null) return null;
+        int length = s.length();
+        if (length == 0 || length == 1) return s;
+
+        // 是否回文矩阵
+        int[][] isPalindromicMatrix = new int[length][length];
+
+        int start = 0, end = 0;
+        // 初始化矩阵对角线上的数据
+        for (int k = 0; k < length; k++) {
+            isPalindromicMatrix[k][k] = 1;
+        }
+        // 初始化矩阵对角线下方的一斜排数据
+        for (int k = 0; k < length - 1; k++) {
+            //若相邻的两位字符相等，则两位子字符串回文
+            if (s.charAt(k) == s.charAt(k + 1)) {
+                isPalindromicMatrix[k][k + 1] = 1;
+                start = k;
+                end = k + 1;
+            } else
+                isPalindromicMatrix[k][k + 1] = 0;
+        }
+
+        // 填满剩余的矩阵（由于每次的检查的回文长度都在递增，故不需要判断长度，直接赋值即可）
+        for (int i = 2; i < length; i++) {
+            for (int k = 0; k < length - i; k++) {
+                if (isPalindromicMatrix[k + 1][k + i - 1] == 1 && s.charAt(k) == s.charAt(k + i)) {
+                    isPalindromicMatrix[k][k + i] = 1;
+                    start = k;
+                    end = k + i;
+                } else
+                    isPalindromicMatrix[k][k + i] = 0;
+            }
+        }
+
+        return s.substring(start, end + 1);
     }
 }

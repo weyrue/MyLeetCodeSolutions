@@ -27,6 +27,7 @@ public class TestSolutions {
 
         Problem5LongestPalindromicSubstring methodClass = new Problem5LongestPalindromicSubstring();
         String output = methodClass.longestPalindrome(input);
+//        String output = methodClass.longestPalindrome2(input);
 
         System.out.println("output = " + output);
 

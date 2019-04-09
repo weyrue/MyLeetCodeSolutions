@@ -3,7 +3,8 @@ package solutions;
 public class TestSolutions {
     public static void main(String[] args) {
 //        problem5LongestPalindromicSubstring();
-        problem6ZigZagConversion();
+//        problem6ZigZagConversion();
+        problem7ReverseInteger();
     }
 
     /**
@@ -24,8 +25,6 @@ public class TestSolutions {
     }
 
     /**
-     *
-     *
      * @version 1.0
      * @author Yi
      * @date 4/8/2019
@@ -37,7 +36,6 @@ public class TestSolutions {
         String output = methodClass.longestPalindrome(input);
 
         System.out.println("output = " + output);
-
     }
 
     /**
@@ -49,11 +47,27 @@ public class TestSolutions {
      */
     private static void problem6ZigZagConversion() {
         String s = "AB";
-        int numRows = 1 ;
+        int numRows = 1;
 
         Problem6ZigZagConversion methodClass = new Problem6ZigZagConversion();
         String zigzagString = methodClass.convert(s, numRows);
 
         System.out.println("zigzagString = " + zigzagString);
+    }
+
+    /**
+     * 7. Reverse Integer
+     *
+     * @version 1.0
+     * @author Yi
+     * @date 4/9/2019
+     */
+    private static void problem7ReverseInteger() {
+        int x = -534236469;
+
+        Problem7ReverseInteger methodClass = new Problem7ReverseInteger();
+        int reverseInteger = methodClass.reverse(x);
+
+        System.out.println("reverseInteger = " + reverseInteger);
     }
 }

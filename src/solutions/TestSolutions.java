@@ -4,38 +4,40 @@ public class TestSolutions {
     public static void main(String[] args) {
 //        problem5LongestPalindromicSubstring();
 //        problem6ZigZagConversion();
-        problem7ReverseInteger();
+//        problem7ReverseInteger();
+        problem8StringToIntegeratoi();
     }
 
     /**
-     * 4. Median of Two Sorted Arrays
+     * 8. String to Integer (atoi)
      *
      * @version 1.0
      * @author Yi
-     * @date 3/26/2019
+     * @date 4/10/2019
      */
-    private static void problem4MedianofTwoSortedArrays() {
-        int[] nums1 = {};
-        int[] nums2 = {1};
+    private static void problem8StringToIntegeratoi() {
+        String str = "    ";
 
-        Problem4MedianofTwoSortedArrays methodClass = new Problem4MedianofTwoSortedArrays();
-        double median = methodClass.findMedianSortedArrays(nums1, nums2);
+        Problem8StringToIntegeratoi methodClass = new Problem8StringToIntegeratoi();
+        int myAtoi = methodClass.myAtoi(str);
 
-        System.out.println("Median = " + median);
+        System.out.println("myAtoi = " + myAtoi);
     }
 
     /**
+     * 7. Reverse Integer
+     *
      * @version 1.0
      * @author Yi
-     * @date 4/8/2019
+     * @date 4/9/2019
      */
-    private static void problem5LongestPalindromicSubstring() {
-        String input = "dcbbc";
+    private static void problem7ReverseInteger() {
+        int x = -534236469;
 
-        Problem5LongestPalindromicSubstring methodClass = new Problem5LongestPalindromicSubstring();
-        String output = methodClass.longestPalindrome(input);
+        Problem7ReverseInteger methodClass = new Problem7ReverseInteger();
+        int reverseInteger = methodClass.reverse(x);
 
-        System.out.println("output = " + output);
+        System.out.println("reverseInteger = " + reverseInteger);
     }
 
     /**
@@ -56,18 +58,36 @@ public class TestSolutions {
     }
 
     /**
-     * 7. Reverse Integer
+     * 5. Longest Palindromic Substring
+     * 
+     * @version 1.0
+     * @author Yi
+     * @date 4/8/2019
+     */
+    private static void problem5LongestPalindromicSubstring() {
+        String input = "dcbbc";
+
+        Problem5LongestPalindromicSubstring methodClass = new Problem5LongestPalindromicSubstring();
+        String output = methodClass.longestPalindrome(input);
+
+        System.out.println("output = " + output);
+    }
+
+    /**
+     * 4. Median of Two Sorted Arrays
      *
      * @version 1.0
      * @author Yi
-     * @date 4/9/2019
+     * @date 3/26/2019
      */
-    private static void problem7ReverseInteger() {
-        int x = -534236469;
+    private static void problem4MedianofTwoSortedArrays() {
+        int[] nums1 = {};
+        int[] nums2 = {1};
 
-        Problem7ReverseInteger methodClass = new Problem7ReverseInteger();
-        int reverseInteger = methodClass.reverse(x);
+        Problem4MedianofTwoSortedArrays methodClass = new Problem4MedianofTwoSortedArrays();
+        double median = methodClass.findMedianSortedArrays(nums1, nums2);
 
-        System.out.println("reverseInteger = " + reverseInteger);
+        System.out.println("Median = " + median);
     }
+
 }

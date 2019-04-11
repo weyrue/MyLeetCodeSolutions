@@ -5,7 +5,24 @@ public class TestSolutions {
 //        problem5LongestPalindromicSubstring();
 //        problem6ZigZagConversion();
 //        problem7ReverseInteger();
-        problem8StringToIntegeratoi();
+//        problem8StringToIntegeratoi();
+        problem9PalindromeNumber();
+    }
+
+    /**
+     * 9. Palindrome Number
+     *
+     * @version 1.0
+     * @author Yi
+     * @date 4/10/2019
+     */
+    private static void problem9PalindromeNumber() {
+        int x = 1221;
+
+        Problem9PalindromeNumber methodClass = new Problem9PalindromeNumber();
+        boolean isPalindrome = methodClass.isPalindrome(x);
+
+        System.out.println("isPalindrome = " + isPalindrome);
     }
 
     /**
@@ -59,7 +76,7 @@ public class TestSolutions {
 
     /**
      * 5. Longest Palindromic Substring
-     * 
+     *
      * @version 1.0
      * @author Yi
      * @date 4/8/2019

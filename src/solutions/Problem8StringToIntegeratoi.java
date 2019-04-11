@@ -5,7 +5,7 @@ public class Problem8StringToIntegeratoi {
         int myAtoi = 0;
         int checkPos = 0;
         char sign = '+';
-        //去除掉字符串前的空格
+        // 去除掉字符串前的空格
         while (checkPos < str.length() && str.charAt(checkPos) == ' ') {
             checkPos++;
         }

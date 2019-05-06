@@ -18,8 +18,8 @@ public class TestSolutions {
      * @date 4/29/2019
      */
     private static void problem10RegularExpressionMatching() {
-        String s = "mississippi";
-        String p = "mis*is*p*.";
+        String s = "aaa";
+        String p = "ab*a*c*a";
 
         Problem10RegularExpressionMatching methodClass = new Problem10RegularExpressionMatching();
         boolean isMatch = methodClass.isMatch(s, p);

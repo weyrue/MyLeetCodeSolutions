@@ -40,7 +40,7 @@ public class Problem10RegularExpressionMatching {
         // if p.charAt(pi-1) != s.charAt(si) : dp[i][j] = dp[i][j-2] //in this case, a* only counts as empty
         // if p.charAt(pi-1) == s.charAt(si) or p.charAt(pi-1) == ‘.’:
         // dp[i][j] = dp[i-1][j] // in this case, a* counts as multiple a
-        // dp[i][j] = dp[i][j-1] // in this case, a* counts as single a
+        // dp[i][j] = dp[i][j-1] // in this case, a* counts as single a(这种情况已包含在multiple a的情况中了)
         // dp[i][j] = dp[i][j-2] // in this case, a* counts as empty
         for (int j = 1; j <= p.length(); j++) {
             int pi = j - 1;
@@ -48,7 +48,7 @@ public class Problem10RegularExpressionMatching {
                 for (int i = 1; i <= s.length(); i++) {
                     int si = i - 1;
                     if (s.charAt(si) == p.charAt(pi - 1) || p.charAt(pi - 1) == '.') {
-                        dp[i][j] = dp[i][j - 2] || dp[i][j - 2] || dp[i - 1][j];
+                        dp[i][j] = dp[i][j - 2] || dp[i - 1][j];
                     } else {
                         dp[i][j] = dp[i][j - 2];
                     }
@@ -60,7 +60,6 @@ public class Problem10RegularExpressionMatching {
                 }
             }
         }
-
         return dp[s.length()][p.length()];
     }
 }

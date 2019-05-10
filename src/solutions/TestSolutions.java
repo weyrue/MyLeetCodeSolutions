@@ -7,7 +7,24 @@ public class TestSolutions {
 //        problem7ReverseInteger();
 //        problem8StringToIntegeratoi();
 //        problem9PalindromeNumber();
-        problem10RegularExpressionMatching();
+//        problem10RegularExpressionMatching();
+        problem11ContainerWithMostWater();
+    }
+
+    /**
+     * 11. Container With Most Water
+     *
+     * @version 1.0
+     * @author Yi
+     * @date 5/10/2019
+     */
+    private static void problem11ContainerWithMostWater() {
+        int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+
+        Problem11ContainerWithMostWater methodClass = new Problem11ContainerWithMostWater();
+        int maxArea = methodClass.maxArea(height);
+
+        System.out.println("maxArea = " + maxArea);
     }
 
     /**

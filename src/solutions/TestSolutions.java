@@ -19,7 +19,8 @@ public class TestSolutions {
      * @date 5/10/2019
      */
     private static void problem11ContainerWithMostWater() {
-        int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+//        int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        int[] height = {1, 2};
 
         Problem11ContainerWithMostWater methodClass = new Problem11ContainerWithMostWater();
         int maxArea = methodClass.maxArea(height);

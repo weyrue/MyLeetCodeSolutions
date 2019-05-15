@@ -23,9 +23,9 @@ public class TestSolutions {
         int[] height = {1, 2};
 
         Problem11ContainerWithMostWater methodClass = new Problem11ContainerWithMostWater();
-        int maxArea = methodClass.maxArea(height);
+//        int maxArea = methodClass.maxArea(height);
 
-        System.out.println("maxArea = " + maxArea);
+//        System.out.println("maxArea = " + maxArea);
     }
 
     /**

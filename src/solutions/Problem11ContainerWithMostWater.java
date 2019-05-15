@@ -5,19 +5,40 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Problem11ContainerWithMostWater {
-    public int maxArea(int[] height) {
-//        for (int laterIndex = 1; laterIndex < height.length; laterIndex++) {
-//            for (int formerIndex = 0; formerIndex < laterIndex; formerIndex++) {
-//                int areaHeight = height[laterIndex] > height[formerIndex] ? height[formerIndex] : height[laterIndex];
-//                int area_tmp = areaHeight * (laterIndex - formerIndex);
-//                if (area_tmp > maxArea) maxArea = area_tmp;
-//            }
-//        }
+    public static void main(String[] args) {
+//        int[] height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        int[] height = {1,2};
 
-        return maxArea2(height);
+        int ret = new Solution11().maxArea2(height);
+
+        String out = String.valueOf(ret);
+
+        System.out.print(out);
     }
 
-    private int maxArea2(int[] height) {
+}
+
+class Solution11 {
+    public int maxArea(int[] height) {
+        int maxArea = 0, tmpArea = 0;
+        int leftPointer = 0, rightPointer = height.length - 1;
+
+        while (rightPointer > leftPointer) {
+            if (height[leftPointer] < height[rightPointer]) {
+                tmpArea = height[leftPointer] * (rightPointer - leftPointer);
+                leftPointer++;
+            } else {
+                tmpArea = height[rightPointer] * (rightPointer - leftPointer);
+                rightPointer--;
+            }
+
+            if (tmpArea > maxArea) maxArea = tmpArea;
+        }
+
+        return maxArea;
+    }
+
+    public int maxArea2(int[] height) {
         int maxArea = 0;
         int maxHeight = 0;
 
@@ -41,22 +62,9 @@ public class Problem11ContainerWithMostWater {
             if (height_xList_Map.get(h).get(0) < xMin) xMin = height_xList_Map.get(h).get(0);
             if (height_xList_Map.get(h).get(listSize - 1) > xMax) xMax = height_xList_Map.get(h).get(listSize - 1);
 
-            if (listSize > 1) {
-                int tmpArea = (height_xList_Map.get(h).get(listSize - 1) - height_xList_Map.get(h).get(0)) * h;
-                if (tmpArea > maxArea) maxArea = tmpArea;
-            }
+            int tmpArea = h*(xMax-xMin);
 
-            for (int x : height_xList_Map.get(h)) {
-                if (x >= xMax) {
-                    int tmpArea = (x - xMin) * h;
-                    if (tmpArea > maxArea) maxArea = tmpArea;
-                }
-
-                if (x <= xMin) {
-                    int tmpArea = (xMax - x) * h;
-                    if (tmpArea > maxArea) maxArea = tmpArea;
-                }
-            }
+            maxArea = tmpArea>maxArea?tmpArea:maxArea;
         }
 
         return maxArea;

@@ -1,6 +1,8 @@
 package solutions;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Problem153Sum {
     public static String int2dListToString(List<List<Integer>> nums) {
@@ -32,7 +34,8 @@ public class Problem153Sum {
     }
 
     public static void main(String[] args) {
-        int[] nums = {-1, 0, 1, 2, -1, -4};
+//        int[] nums = {-1, 0, 1, 2, -1, -4};
+        int[] nums = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
 
         List<List<Integer>> ret = new Solution15().threeSum(nums);
 
@@ -45,16 +48,20 @@ public class Problem153Sum {
 class Solution15 {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> zeroList = new LinkedList<>();
+        Arrays.sort(nums);
 
-        for (int i = nums.length - 1; i >= 0; i--) {
+        for (int i = nums.length - 1; i > 1; i--) {
+            if (i < nums.length - 1 && nums[i] == nums[i + 1]) continue;
+
             int[] subNums = Arrays.copyOf(nums, i);
 
             List<List<Integer>> subList = twoSum(subNums, -nums[i]);
 
             for (List<Integer> twoSumIndexlist : subList) {
                 List<Integer> list = new LinkedList<>();
-                list.add(nums[twoSumIndexlist.get(0)]);
-                list.add(nums[twoSumIndexlist.get(1)]);
+
+                list.add(twoSumIndexlist.get(0));
+                list.add(twoSumIndexlist.get(1));
                 list.add(nums[i]);
                 zeroList.add(list);
             }
@@ -65,7 +72,7 @@ class Solution15 {
     }
 
     /**
-     * 返回和为sum的两个数字的index
+     * 返回和为sum的两个数字
      *
      * @param nums 数组
      * @param sum  和
@@ -76,14 +83,24 @@ class Solution15 {
      */
     private List<List<Integer>> twoSum(int[] nums, int sum) {
         List<List<Integer>> sumList = new LinkedList<>();
+        int lowerIndex = 0, higherIndex = nums.length - 1;
 
-        Map<Integer, Integer> valueIndexMap = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int difference = sum - nums[i];
-            if (valueIndexMap.containsKey(difference)) {
-                sumList.add(Arrays.asList(valueIndexMap.get(difference), i));
+        while (higherIndex > lowerIndex) {
+            if (nums[lowerIndex] + nums[higherIndex] == sum) {
+                List<Integer> list = new LinkedList<>();
+                list.add(nums[lowerIndex++]);
+                list.add(nums[higherIndex--]);
+                sumList.add(list);
+                while (higherIndex >= 0 && nums[higherIndex] == nums[higherIndex + 1]) higherIndex--;
+                while (lowerIndex < nums.length && nums[lowerIndex] == nums[lowerIndex - 1]) lowerIndex++;
+            } else {
+                while (higherIndex > 0 && ((higherIndex < nums.length - 1 && nums[higherIndex] == nums[higherIndex + 1]) || nums[lowerIndex] + nums[higherIndex] > sum)) {
+                    higherIndex--;
+                }
+                while (lowerIndex < nums.length - 1 && ((lowerIndex > 0 && nums[lowerIndex] == nums[lowerIndex - 1]) || nums[lowerIndex] + nums[higherIndex] < sum)) {
+                    lowerIndex++;
+                }
             }
-            valueIndexMap.put(nums[i], i);
         }
 
         return sumList;

@@ -48,22 +48,24 @@ public class Problem153Sum {
 class Solution15 {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> zeroList = new LinkedList<>();
+        if (nums.length < 3) return zeroList;
+
         Arrays.sort(nums);
 
-        for (int i = nums.length - 1; i > 1; i--) {
-            if (i < nums.length - 1 && nums[i] == nums[i + 1]) continue;
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
 
-            int[] subNums = Arrays.copyOf(nums, i);
+            if (nums[i] > 0) break;
+            if (nums[i] + nums[i + 1] + nums[i + 2] > 0) break;
+            if (nums[i] + nums[nums.length - 2] + nums[nums.length - 1] < 0) continue;
 
-            List<List<Integer>> subList = twoSum(subNums, -nums[i]);
+            List<List<Integer>> twoSumList = twoSum(nums, -nums[i], i + 1);
 
-            for (List<Integer> twoSumIndexlist : subList) {
-                List<Integer> list = new LinkedList<>();
-
-                list.add(twoSumIndexlist.get(0));
-                list.add(twoSumIndexlist.get(1));
-                list.add(nums[i]);
-                zeroList.add(list);
+            if (!twoSumList.isEmpty()) {
+                for (List<Integer> singleTwoSumList : twoSumList) {
+                    singleTwoSumList.add(0, nums[i]);
+                    zeroList.add(singleTwoSumList);
+                }
             }
 
         }
@@ -81,25 +83,26 @@ class Solution15 {
      * @author Yi
      * @date 5/16/2019
      */
-    private List<List<Integer>> twoSum(int[] nums, int sum) {
+    private List<List<Integer>> twoSum(int[] nums, int sum, int startIndex) {
         List<List<Integer>> sumList = new LinkedList<>();
-        int lowerIndex = 0, higherIndex = nums.length - 1;
 
-        while (higherIndex > lowerIndex) {
-            if (nums[lowerIndex] + nums[higherIndex] == sum) {
-                List<Integer> list = new LinkedList<>();
-                list.add(nums[lowerIndex++]);
-                list.add(nums[higherIndex--]);
-                sumList.add(list);
-                while (higherIndex >= 0 && nums[higherIndex] == nums[higherIndex + 1]) higherIndex--;
-                while (lowerIndex < nums.length && nums[lowerIndex] == nums[lowerIndex - 1]) lowerIndex++;
+        int formerIndex = startIndex, latterIndex = nums.length - 1;
+
+        while (formerIndex < latterIndex) {
+            int tmpSum = nums[formerIndex] + nums[latterIndex];
+
+            if (tmpSum > sum) {
+                latterIndex--;
+            } else if (tmpSum < sum) {
+                formerIndex++;
             } else {
-                while (higherIndex > 0 && ((higherIndex < nums.length - 1 && nums[higherIndex] == nums[higherIndex + 1]) || nums[lowerIndex] + nums[higherIndex] > sum)) {
-                    higherIndex--;
-                }
-                while (lowerIndex < nums.length - 1 && ((lowerIndex > 0 && nums[lowerIndex] == nums[lowerIndex - 1]) || nums[lowerIndex] + nums[higherIndex] < sum)) {
-                    lowerIndex++;
-                }
+                List<Integer> tmpList = new LinkedList<>();
+                tmpList.add(nums[formerIndex]);
+                tmpList.add(nums[latterIndex]);
+                sumList.add(tmpList);
+                formerIndex++;
+                while (formerIndex < nums.length && nums[formerIndex] == nums[formerIndex - 1])
+                    formerIndex++;
             }
         }
 

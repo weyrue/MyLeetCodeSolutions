@@ -1,12 +1,9 @@
 package solutions.Problem22GenerateParentheses;
 
-import java.nio.ByteBuffer;
-import java.nio.channels.AsynchronousFileChannel;
-import java.nio.channels.CompletionHandler;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class MainClass {
     public static String stringListToString(List<String> stringList) {
@@ -21,46 +18,22 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-//        String line = "3";
-//        int n = Integer.parseInt(line);
-//
-//        List<String> ret = new Solution().generateParenthesis(n);
-//
-//        String out = stringListToString(ret);
-//
-//        System.out.print(out);
+        String line = "3";
+        int n = Integer.parseInt(line);
 
-        try {
-            Path file = Paths.get("C:\\Users\\Yi\\Desktop\\" + "test.txt");
+        List<String> ret = new Solution().generateParenthesis(n);
 
-            AsynchronousFileChannel channel = AsynchronousFileChannel.open(file);
+        String out = stringListToString(ret);
 
-            ByteBuffer buffer = ByteBuffer.allocate(100_000);
-            Future<Integer> result = channel.read(buffer, 0);
+        System.out.print(out);
 
-            channel.read(buffer, 0, buffer, new CompletionHandler<Integer, ByteBuffer>() {
-                @Override
-                public void completed(Integer result, ByteBuffer attachment) {
-                    System.out.println(attachment.toString());
-                    System.out.println("Bytes read [" + result + "]");
-                }
+        AtomicLong sequenceNumber = new AtomicLong(0);
+        sequenceNumber.getAndIncrement();
+        final Set<String> set = new HashSet<>();
+        set.add("1");
+        set.remove("1");
 
-                @Override
-                public void failed(Throwable exc, ByteBuffer attachment) {
-                    System.err.println(exc);
-                }
-            });
-
-//            while (!result.isDone()) {
-//                System.out.print("干点别的事情");
-//
-//            }
-//
-//            Integer bytesRead = result.get();
-//
-//            System.out.print("Bytes read [" + bytesRead + "]");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
+
+
 }

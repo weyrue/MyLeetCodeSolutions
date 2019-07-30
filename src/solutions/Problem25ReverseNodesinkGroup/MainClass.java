@@ -45,9 +45,9 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-        String line = "[1,2,3,4,5]";
+        String line = "[1,2,3,4,5,6,7,8]";
         ListNode head = stringToListNode(line);
-        line = "2";
+        line = "3";
         int k = Integer.parseInt(line);
 
         ListNode ret = new Solution().reverseKGroup(head, k);

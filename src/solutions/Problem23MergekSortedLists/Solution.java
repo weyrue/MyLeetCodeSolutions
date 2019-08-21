@@ -1,6 +1,6 @@
 package solutions.Problem23MergekSortedLists;
 
-/**
+/*
  * O(Nlogk)算法：
  * <p>
  * 算法1：
@@ -75,7 +75,7 @@ class Solution {
 //        return head.next;
 //    }
 
-    /**
+    /*
      * 算法2：
      * 利用合并两个有序链表的时间复杂度为O(n)，其中n为两个链表节点数量的和，采用分而治之的算法。
      * 第一次将k个有序队列两两合并，时间复杂度为O(N)。
@@ -91,11 +91,11 @@ class Solution {
      */
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists.length == 0) return null;
-        /**
+        /*
          * 为充分利用已有的空间，设置一个逻辑队尾变量
          */
         int totalLength = lists.length;
-        /**
+        /*
          * 有序队列两两合并，将结果记录在原有的数组中（节约空间），totalLength用于记录实际的队尾
          */
         int i;
@@ -129,7 +129,7 @@ class Solution {
      */
     private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode head = new ListNode(0), pointer = head;
-        /**
+        /*
          * 合并两个有序链表，直到有一个为空
          */
         while (l1 != null && l2 != null) {
@@ -142,7 +142,7 @@ class Solution {
             }
             pointer = pointer.next;
         }
-        /**
+        /*
          * 将非空的链表直接拼接在结果的队尾
          */
         if (l1 != null) {

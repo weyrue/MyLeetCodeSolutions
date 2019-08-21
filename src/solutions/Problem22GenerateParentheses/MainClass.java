@@ -1,9 +1,9 @@
 package solutions.Problem22GenerateParentheses;
 
-import java.util.HashSet;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class MainClass {
     public static String stringListToString(List<String> stringList) {
@@ -26,14 +26,8 @@ public class MainClass {
         String out = stringListToString(ret);
 
         System.out.print(out);
-
-        AtomicLong sequenceNumber = new AtomicLong(0);
-        sequenceNumber.getAndIncrement();
-        final Set<String> set = new HashSet<>();
-        set.add("1");
-        set.remove("1");
-
     }
 
-
 }
+
+

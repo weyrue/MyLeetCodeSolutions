@@ -4,7 +4,6 @@ import java.util.List;
 
 public class MainClass {
     public static String[] stringToStringArray(String line) {
-
 //        JsonArray jsonArray = JsonArray.readFrom(line);
 //        String[] arr = new String[jsonArray.size()];
         String[] arr = line.substring(1, line.length() - 1).split(",");
@@ -33,9 +32,9 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-        String line = "barfoothefoobarman";
+        String line = "abaababbaba";
         String s = line;
-        line = "[\"foo\",\"bar\"]";
+        line = "\"ba\",\"ab\",\"ab\"";
         String[] words = stringToStringArray(line);
 
         List<Integer> ret = new Solution().findSubstring(s, words);

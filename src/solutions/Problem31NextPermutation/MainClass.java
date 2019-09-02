@@ -35,7 +35,8 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-        String line = "[1,2,3]";
+        String line = "[6,2,5,4,3,2,1]";
+//        String line = "[3,2,1]";
         int[] nums = stringToIntegerArray(line);
 
         new Solution().nextPermutation(nums);

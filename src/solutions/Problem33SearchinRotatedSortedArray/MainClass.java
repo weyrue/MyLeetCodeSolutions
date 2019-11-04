@@ -18,9 +18,9 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-        String line = "[4,5,6,7,0,1,2]";
+        String line = "[2,3,4,5,6,7,8,9,1]";
+        int target = 3;
         int[] nums = stringToIntegerArray(line);
-        int target = 0;
 
         int ret = new Solution().search(nums, target);
 

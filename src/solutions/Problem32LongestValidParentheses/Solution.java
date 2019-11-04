@@ -1,6 +1,6 @@
 package solutions.Problem32LongestValidParentheses;
 
-public class Solution {
+class Solution {
     public int longestValidParentheses(String s) {
         int maxSize = 0, tmpMaxSize = 0;
         int leftPairStackSize = 0;

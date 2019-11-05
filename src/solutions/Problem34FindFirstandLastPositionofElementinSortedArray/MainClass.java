@@ -35,9 +35,9 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-        String line = "[5,7,7,8,8,10]";
+        String line = "[0,0,1,1,1,2,2,3,3,3,4,4,4,4,5,5,6,6,6,8,10,10]";
         int[] nums = stringToIntegerArray(line);
-        int target = 8;
+        int target = 4;
 
         int[] ret = new Solution().searchRange(nums, target);
 

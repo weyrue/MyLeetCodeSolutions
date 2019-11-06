@@ -18,9 +18,9 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-        String line = "[1,3,5,6]";
+        String line = "[1,3]";
         int[] nums = stringToIntegerArray(line);
-        int target = 5;
+        int target = 1;
 
         int ret = new Solution().searchInsert(nums, target);
 

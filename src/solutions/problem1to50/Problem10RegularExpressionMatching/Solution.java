@@ -1,9 +1,9 @@
-package solutions.problem1to50;
+package solutions.problem1to50.Problem10RegularExpressionMatching;
 
-public class Problem10RegularExpressionMatching {
+class Solution {
     public boolean isMatch(String s, String p) {
-//        return isMatchRecursion(s, p, 0, 0);
-        return isMatchDynamicProgramming(s, p);
+        return isMatchRecursion(s, p, 0, 0);
+//        return isMatchDynamicProgramming(s, p);
     }
 
     private boolean isMatchRecursion(String s, String p, int si, int pi) {

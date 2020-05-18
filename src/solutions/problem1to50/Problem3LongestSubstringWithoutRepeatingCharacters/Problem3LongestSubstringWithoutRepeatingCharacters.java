@@ -1,4 +1,4 @@
-package solutions.problem1to50;
+package solutions.problem1to50.Problem3LongestSubstringWithoutRepeatingCharacters;
 
 import java.util.HashMap;
 import java.util.Map;

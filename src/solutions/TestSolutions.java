@@ -30,22 +30,6 @@ public class TestSolutions {
 //        System.out.println("maxArea = " + maxArea);
     }
 
-    /**
-     * 10. Regular Expression Matching
-     *
-     * @version 1.0
-     * @author Yi
-     * @date 4/29/2019
-     */
-    private static void problem10RegularExpressionMatching() {
-        String s = "a";
-        String p = "";
-
-        Problem10RegularExpressionMatching methodClass = new Problem10RegularExpressionMatching();
-        boolean isMatch = methodClass.isMatch(s, p);
-
-        System.out.println("isMatch = " + isMatch);
-    }
 
     /**
      * 9. Palindrome Number

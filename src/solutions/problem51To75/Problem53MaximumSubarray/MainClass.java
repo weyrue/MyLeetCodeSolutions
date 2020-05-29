@@ -18,9 +18,9 @@ public class MainClass {
     }
 
     public static void main(String[] args) {
-//        String line = "[-2,1,-3,4,-1,2,1,-5,4]";
+        String line = "[-2,1,-3,4,-1,2,1,-5,4]";
 
-        String line = "[-2,-1]";
+//        String line = "[-2,-1]";
         int[] nums = stringToIntegerArray(line);
 
         int ret = new Solution().maxSubArray(nums);
